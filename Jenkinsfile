@@ -1,5 +1,7 @@
 node {
-  
+  stage('Clone repository') {
+        git branch: "master", url: "https://github.com/bittu664/python-apps-test.git"
+    }
   stage ('Docker build') {
   docker.build('python-test')
   }
