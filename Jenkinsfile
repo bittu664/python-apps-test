@@ -7,7 +7,10 @@ node {
   }
   stage ('Docker push') {
   docker.withRegistry('https://861458561402.dkr.ecr.us-east-2.amazonaws.com/python-test', 'ecr:us-east-2:aws-ecr') {
-    docker.image('python-test').push("${env.BUILD_ID}")
+    sh "git rev-parse HEAD > .git/commit-id"
+        def commit_id = readFile('.git/commit-id').trim()
+        println commit_id
+    docker.image('python-test').push("${commit_id}")
   }
 }
 }
