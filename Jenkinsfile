@@ -1,11 +1,11 @@
 node {
   
   stage ('Docker build') {
-  docker.build('nodejs-test')
+  docker.build('python-test')
   }
   stage ('Docker push') {
-  docker.withRegistry('https://861458561402.dkr.ecr.us-east-2.amazonaws.com/nodejs-test', 'ecr:us-east-2:aws-ecr') {
-    docker.image('nodejs-test').push('latest')
+  docker.withRegistry('https://861458561402.dkr.ecr.us-east-2.amazonaws.com/python-test', 'ecr:us-east-2:aws-ecr') {
+    docker.image('python-test').push('latest')
   }
 }
 }
