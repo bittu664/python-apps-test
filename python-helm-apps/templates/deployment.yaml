@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: hello-kubernetes
 spec:
-  replicas: "{{ .Values.replicaCount }}"
+  replicas: 5
   selector:
     matchLabels:
       app: hello-kubernetes
