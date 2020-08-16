@@ -12,4 +12,10 @@ node {
     docker.image('python-test').push("${ImageTag}")
   }
 }
+  stage('Apply Kubernetes files') {
+    withKubeConfig([credentialsId: 'my-kubernetes', serverUrl: 'https://F16428A6A98F68A4E809DCE9C3CD1D98.gr7.us-east-2.eks.amazonaws.com']) {
+      sh 'kubectl apply -f /home/ubuntu/deployment.yaml'
+      sh 'kubectl get pods'
+    }
+  }
 }
