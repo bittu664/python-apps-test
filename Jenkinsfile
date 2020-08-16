@@ -18,8 +18,7 @@ node {
 }
   stage('Deploying HELM Chart in Kubernetes') {
     withKubeConfig([credentialsId: 'my-kubernetes', serverUrl: 'https://F16428A6A98F68A4E809DCE9C3CD1D98.gr7.us-east-2.eks.amazonaws.com']) {
-      sh 'git rev-parse –short HEAD'
-      sh 'helm upgrade my-cherry-chart python-helm-apps/ --set image.tag="${TAG}" --values python-helm-apps/values.yaml'
+      sh 'helm upgrade my-cherry-chart python-helm-apps/ --set image.tag=3c9956e60a52a10d71b98502e93f97dd56ceaaef --values python-helm-apps/values.yaml'
       sh 'kubectl get pods'
     }
   }
