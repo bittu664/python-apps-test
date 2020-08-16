@@ -14,8 +14,9 @@ node {
 }
   stage('Apply Kubernetes files') {
     withKubeConfig([credentialsId: 'my-kubernetes', serverUrl: 'https://F16428A6A98F68A4E809DCE9C3CD1D98.gr7.us-east-2.eks.amazonaws.com']) {
-      ImageTag = "${checkout(scm).GIT_COMMIT}"
-      sh 'helm install my-cherry-chart python-helm-apps/  --values python-helm-apps/values.yaml'
+      sh "git rev-parse --short HEAD > .git/commit-id"
+      imageTag= readFile('.git/commit-id').trim()
+      sh 'helm install my-cherry-chart python-helm-apps/ --set image.tag=${imageTag} --values python-helm-apps/values.yaml'
       sh 'kubectl get pods'
     }
   }
