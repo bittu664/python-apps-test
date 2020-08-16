@@ -2,6 +2,7 @@ node {
   
   environment{
       ImageTag = "${checkout(scm).GIT_COMMIT}"
+      TAG = "$(shell git rev-parse –short HEAD)"
     
   }
   stage('Clone repository') {
@@ -19,7 +20,7 @@ node {
 }
   stage('Deploying HELM Chart in Kubernetes') {
     withKubeConfig([credentialsId: 'my-kubernetes', serverUrl: 'https://F16428A6A98F68A4E809DCE9C3CD1D98.gr7.us-east-2.eks.amazonaws.com']) {
-      sh 'helm upgrade my-cherry-chart python-helm-apps/ --set image.tag="${checkout(scm).GIT_COMMIT}" --values python-helm-apps/values.yaml'
+      sh 'helm upgrade my-cherry-chart python-helm-apps/ --set image.tag="${TAG}" --values python-helm-apps/values.yaml'
       sh 'kubectl get pods'
     }
   }
