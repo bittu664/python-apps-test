@@ -5,8 +5,7 @@
 replicaCount: 5
 
 image:
-  repository: 861458561402.dkr.ecr.us-east-2.amazonaws.com/python-test
-  tag: tagVersion
+  repository: 861458561402.dkr.ecr.us-east-2.amazonaws.com/python-test:tagVersion 
   pullPolicy: Always
 
 imagePullSecrets: []
