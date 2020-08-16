@@ -19,8 +19,7 @@ node {
 }
   stage('Apply Kubernetes files') {
     withKubeConfig([credentialsId: 'my-kubernetes', serverUrl: 'https://F16428A6A98F68A4E809DCE9C3CD1D98.gr7.us-east-2.eks.amazonaws.com']) {
-      sh 'chmod +x changetag.sh'
-      sh './change.sh ${ImageTag}'
+      sh 'sed "s/tagVersion/$1/g" /python-helm-apps/values.yaml > /python-helm-apps/values.yaml ${ImageTag}'
       sh 'helm install my-cherry-chart python-helm-apps/  --values python-helm-apps/values.yaml'
       sh 'kubectl get pods'
     }
