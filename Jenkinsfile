@@ -10,7 +10,7 @@ node {
   docker.build('python-test')
   }
   stage ('Docker push') {
-  docker.withRegistry('https://861458561402.dkr.ecr.us-east-2.amazonaws.com/python-test', 'ecr:us-east-2:aws-keys') {
+  docker.withRegistry('https://1234567890.dkr.ecr.us-east-2.amazonaws.com/python-test', 'ecr:us-east-2:aws-keys') {
         ImageTag = "${checkout(scm).GIT_COMMIT}"
     
     docker.image('python-test').push("${ImageTag}")
